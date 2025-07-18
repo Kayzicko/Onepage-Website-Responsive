@@ -86,13 +86,13 @@ html, body {
   background-image: url("background-home.png");
 }
 .segment-2 {
-  background-image: url("Hintergrund-about.png");
+  background-image: url("background-about.png");
 }
 .segment-3 {
   background-image: url("background-skills.png");
 }
 .segment-4 {
-  background-image: url("Hintergrund-contact.png");
+  background-image: url("background-contact.png");
 }
 
 /* ========== Textboxen & Inhalte ========== */
