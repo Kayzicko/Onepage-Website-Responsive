@@ -127,9 +127,26 @@ html, body {
 
 /* ========== Skills Liste ========== */
 .skill-list {
-  list-style-type: "💻 ";
-  padding-left: 1.5rem;
-  line-height: 1.8;
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+  margin: 2rem auto 0;
+  max-width: 800px;
+}
+
+.skill-list li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.skill-list li::before {
+  content: "💻";
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 /* ========== Kontakt-Bereich ========== */
