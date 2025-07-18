@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TK//dev – Timo Kaulbars</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+
+  <body>
+    <!-- Header mit Navigation -->
+    <header class="site-header">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="image/imageslogo-icon.png" alt="Logo" class="logo-icon" />
+          <span>TK//dev</span>
+        </div>
+
+        <div class="burger" id="burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <nav class="main-nav" id="nav">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Über mich</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Segment 1: Home -->
+    <section id="home" class="segment segment-1">
+      <div class="overlay-text">
+        <h1>Willkommen bei TK//dev</h1>
+        <p>
+          Du suchst eine individuelle, moderne Website, die nicht nur
+          funktioniert, sondern überzeugt? Ich helfe dir, deine Idee digital
+          sichtbar zu machen – kreativ, strukturiert und mit Herz für Design &
+          Code.
+        </p>
+      </div>
+    </section>
+
+    <!-- Segment 2: Über mich -->
+    <section id="about" class="segment segment-2">
+      <div class="overlay-text">
+        <h2>Über mich</h2>
+        <p>
+          Mein Name ist Timo Kaulbars, ich bin 28 Jahre alt, komme aus NRW und
+          bin leidenschaftlicher Hobby-Entwickler auf dem Weg in die
+          Selbstständigkeit.
+        </p>
+        <p>
+          Was als kreative Spielerei begann, wurde zu meiner Vision: Ich möchte
+          Menschen helfen, durch ansprechende und funktionale Websites sichtbar
+          zu werden – sei es für Unternehmen, Freelancer oder persönliche
+          Projekte.
+        </p>
+        <p>
+          Aktuell baue ich mein Portfolio auf und entwickle mich täglich weiter.
+          Dabei stehen für mich klare Kommunikation, ein Auge fürs Detail und
+          ehrlicher Code im Fokus.
+        </p>
+      </div>
+    </section>
+
+    <!-- Segment 3: Skills -->
+    <section id="skills" class="segment segment-3">
+      <div class="overlay-text">
+        <h2>Meine Skills</h2>
+        <ul class="skill-list">
+          <li>
+            <strong>HTML & CSS:</strong> Solide Grundlagen – ich baue Onepager
+            responsive & sauber.
+          </li>
+          <li>
+            <strong>Java:</strong> Erste Erfahrungen – Fokus liegt auf Web,
+            nicht komplexen Anwendungen.
+          </li>
+          <li>
+            <strong>Python:</strong> GUI-Projekte wie z. B. Einkaufslisten –
+            stetig im Lernprozess.
+          </li>
+          <li>
+            <strong>Design & Struktur:</strong> Ich liebe moderne, logische
+            Layouts – mit Blick fürs Detail.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Segment 4: Kontakt -->
+    <section id="contact" class="segment segment-4">
+      <div class="overlay-text contact-box">
+        <h2>Kontakt</h2>
+        <p>Bereit für dein Projekt? Ich freue mich auf deine Nachricht!</p>
+        <div class="contact-actions">
+          <a href="mailto:kaulbars.t1996@gmail.com" class="contact-button">
+            📧 E-Mail schreiben
+          </a>
+        </div>
+        <p class="small-note">
+          Oder schreib mir direkt auf
+          <a href="https://github.com/" target="_blank">GitHub</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p>&copy; 2025 TK//dev – Timo Kaulbars</p>
+        <p>
+          <a href="#" onclick="openModal('modal-impressum')">📄 Impressum</a> |
+          <a href="#" onclick="openModal('modal-datenschutz')"
+            >🔐 Datenschutz</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <!-- === MODAL: IMPRESSUM === -->
+    <div id="modal-impressum" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('modal-impressum')"
+          >&times;</span
+        >
+        <h2>Impressum</h2>
+        <p>Angaben gemäß § 5 TMG:</p>
+        <p>
+          Timo Kaulbars<br />
+          TK//dev – Webentwicklung & Design<br />
+          Entwicklerstraße 1<br />
+          12345 Coderstadt<br />
+          Deutschland
+        </p>
+
+        <p>
+          Kontakt:<br />
+          E-Mail:
+          <a href="mailto:kaulbars.t1996@gmail.com">kaulbars.t1996@gmail.com</a>
+        </p>
+
+        <p>
+          Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:<br />
+          Timo Kaulbars<br />
+          Adresse wie oben
+        </p>
+      </div>
+    </div>
+
+    <!-- === MODAL: DATENSCHUTZ === -->
+    <div id="modal-datenschutz" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('modal-datenschutz')"
+          >&times;</span
+        >
+        <h2>Datenschutzerklärung</h2>
+
+        <p>
+          Der Schutz Ihrer persönlichen Daten ist mir wichtig. Diese Website
+          erhebt und speichert keine personenbezogenen Daten, es sei denn, Sie
+          nehmen freiwillig per E-Mail Kontakt auf.
+        </p>
+
+        <p>
+          Beim Besuch dieser Website werden automatisch Informationen (z. B.
+          Browsertyp, Datum, Uhrzeit) durch den Webserver erfasst. Diese Daten
+          sind nicht bestimmten Personen zuordenbar und dienen ausschließlich
+          der technischen Sicherstellung des Betriebs.
+        </p>
+
+        <p>
+          Wenn Sie mir eine E-Mail senden, wird Ihre Adresse ausschließlich zur
+          Beantwortung Ihrer Anfrage verwendet und nicht an Dritte
+          weitergegeben.
+        </p>
+
+        <p>
+          Sie haben jederzeit das Recht auf Auskunft, Berichtigung oder Löschung
+          Ihrer gespeicherten Daten. Bei Fragen wenden Sie sich bitte an:
+          <a href="mailto:kaulbars.t1996@gmail.com">kaulbars.t1996@gmail.com</a>
+        </p>
+
+        <p>Weitere Infos auf Anfrage.</p>
+      </div>
+    </div>
+  </body>
+</html>

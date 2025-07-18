@@ -1,0 +1,291 @@
+/* ========== Basis Reset ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* ========== Header & Navigation ========== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000a2f;
+  padding: 1rem 2rem;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.main-nav a {
+  color: #78baff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: white;
+}
+
+/* ========== Segmente Allgemein ========== */
+.segment {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
+  text-align: center;
+  scroll-margin-top: 80px;
+}
+
+.segment + .segment {
+  box-shadow: inset 0 6px 6px -6px rgba(0, 0, 0, 0.4);
+}
+
+/* ========== Hintergrundbilder ========== */
+.segment-1 {
+  background-image: url("image/background-home.png");
+}
+.segment-2 {
+  background-image: url("image/background-about.png");
+}
+.segment-3 {
+  background-image: url("image/background-skills.png");
+}
+.segment-4 {
+  background-image: url("image/background-contact.png");
+}
+
+/* ========== Textboxen & Inhalte ========== */
+.overlay-text,
+.about-container,
+.skills-box,
+.contact-box {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2.5rem;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.overlay-text h1,
+.about-container h2,
+.skills-box h2,
+.contact-box h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #4ea0ff;
+}
+
+.overlay-text p,
+.contact-box p {
+  font-size: 1.2rem;
+}
+
+.highlight {
+  color: #4ea0ff;
+}
+
+/* ========== Skills Liste ========== */
+.skill-list {
+  list-style-type: "💻 ";
+  padding-left: 1.5rem;
+  line-height: 1.8;
+}
+
+/* ========== Kontakt-Bereich ========== */
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.contact-button {
+  background-color: #1e90ff;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: #0f5bb5;
+}
+
+.small-note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* ========== Footer ========== */
+.site-footer {
+  background-color: #0a0a23;
+  color: #ccc;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.site-footer a {
+  color: #78baff;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+}
+
+/* ========== Modal-Popups ========== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background-color: #0d1b2a;
+  margin: 10% auto;
+  padding: 2rem;
+  border: 2px solid #4ea0ff;
+  width: 80%;
+  max-width: 600px;
+  color: #fff;
+  border-radius: 10px;
+  animation: modalFade 0.4s ease;
+  box-shadow: 0 0 30px rgba(78, 160, 255, 0.4);
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.close-btn {
+  float: right;
+  font-size: 1.5rem;
+  color: #4ea0ff;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: white;
+}
+
+/* ========== Burger Menü für Mobile ========== */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.burger span {
+  height: 3px;
+  width: 25px;
+  background: #78baff;
+  border-radius: 2px;
+}
+
+/* ========== Responsive Anpassungen ========== */
+@media (max-width: 768px) {
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #000a2f;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-nav.open {
+    display: flex;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.5rem 0;
+  }
+
+  .main-nav a {
+    font-size: 1.2rem;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .overlay-text {
+    padding: 1.5rem;
+  }
+}
