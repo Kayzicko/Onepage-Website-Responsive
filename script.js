@@ -1,12 +1,23 @@
-// Burger-Menü Steuerung
+// ========== Burger-Menü Steuerung ==========
 const burger = document.getElementById("burger");
-if (burger) {
+const nav = document.getElementById("nav");
+
+if (burger && nav) {
+  // Menü öffnen/schließen bei Klick auf Burger
   burger.addEventListener("click", function () {
-    document.getElementById("nav").classList.toggle("open");
+    nav.classList.toggle("open");
+  });
+
+  // Menü schließen bei Klick auf Link (nur in mobiler Ansicht)
+  const navLinks = nav.querySelectorAll("a");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+    });
   });
 }
 
-// Modalsteuerung
+// ========== Modalsteuerung ==========
 function openModal(id) {
   document.getElementById(id).style.display = "block";
 }
@@ -24,39 +35,34 @@ window.onclick = function (event) {
   });
 };
 
-// Portfolio Detail-Steuerung
+// ========== Portfolio Detail-Steuerung ==========
 document.addEventListener("DOMContentLoaded", () => {
   const karten = document.querySelectorAll(".portfolio-karte");
-
-  // Globale Timer-Liste
-  let closeTimers = new Map();
+  const closeTimers = new Map();
 
   karten.forEach((karte) => {
-    // Klick: Nur diese Karte öffnen, andere schließen
+    // Klick öffnet oder schließt (ideal für Touch-Geräte)
     karte.addEventListener("click", (e) => {
       e.stopPropagation();
+      const istAktiv = karte.classList.contains("active");
 
-      // Abbrechen, wenn diese Karte bereits aktiv ist
-      if (karte.classList.contains("active")) return;
-
-      // Alle anderen Karten schließen + Timer abbrechen
+      // Alle schließen
       karten.forEach((andere) => {
-        if (andere !== karte) {
-          andere.classList.remove("active");
-
-          const otherTimer = closeTimers.get(andere);
-          if (otherTimer) {
-            clearTimeout(otherTimer);
-            closeTimers.delete(andere);
-          }
+        andere.classList.remove("active");
+        const timer = closeTimers.get(andere);
+        if (timer) {
+          clearTimeout(timer);
+          closeTimers.delete(andere);
         }
       });
 
-      // Aktuelle Karte aktivieren
-      karte.classList.add("active");
+      // Nur öffnen, wenn nicht aktiv
+      if (!istAktiv) {
+        karte.classList.add("active");
+      }
     });
 
-    // Maus verlässt Karte → nach 300ms schließen
+    // Desktop: Mausverlassen → schließen
     karte.addEventListener("mouseleave", () => {
       const timer = setTimeout(() => {
         karte.classList.remove("active");
@@ -65,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       closeTimers.set(karte, timer);
     });
 
-    // Maus kehrt zurück → Schließen abbrechen
+    // Desktop: Rückkehr → Timer abbrechen
     karte.addEventListener("mouseenter", () => {
       const timer = closeTimers.get(karte);
       if (timer) {
@@ -75,3 +81,91 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// ========== Dark-/Light-Mode Umschalten + Speichern ==========
+const toggleBtn = document.getElementById("mode-toggle");
+const body = document.body;
+
+const gespeicherterModus = localStorage.getItem("design-modus");
+if (gespeicherterModus === "light") {
+  body.classList.add("light-mode");
+  toggleBtn.textContent = "🌙";
+}
+
+toggleBtn.addEventListener("click", () => {
+  body.classList.toggle("light-mode");
+
+  const istLight = body.classList.contains("light-mode");
+  toggleBtn.textContent = istLight ? "🌙" : "☀️";
+  localStorage.setItem("design-modus", istLight ? "light" : "dark");
+});
+
+// Portfolio-Filter
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const karten = document.querySelectorAll(".portfolio-karte");
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+
+      // Aktiven Button visuell markieren
+      filterButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      karten.forEach((karte) => {
+        const kategorie = karte.getAttribute("data-kategorie");
+
+        const sichtbar = filter === "alle" || filter === kategorie;
+
+        // Sichtbarkeit steuern
+        karte.style.display = sichtbar ? "block" : "none";
+
+        // Animation resetten
+        if (sichtbar) {
+          karte.classList.remove("animate-in");
+          void karte.offsetWidth; // ← Browser zwingt Repaint
+          karte.classList.add("animate-in");
+        }
+
+        // Bei Wechsel: Details sicher schließen
+        if (!sichtbar) {
+          karte.classList.remove("active");
+          karten.forEach((karte) => karte.classList.add("animate-in"));
+        }
+      });
+    });
+  });
+});
+
+      
+// ========== Sichtbarkeits-Animation: Jedes Mal beim Reinscrollen ==========
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      // Wenn sichtbar → "visible" hinzufügen
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      } else {
+        // Wenn NICHT sichtbar → "visible" entfernen
+        entry.target.classList.remove("visible");
+      }
+    });
+  },
+  {
+    threshold: 0.1,
+  }
+);
+
+// Alle Elemente mit scroll-fade animieren
+document.querySelectorAll(".scroll-fade").forEach((el) => {
+  observer.observe(el);
+
+  // Alle .scroll-fade-left-Elemente beobachten
+document.querySelectorAll(".scroll-fade-left").forEach((el, index) => {
+  // Optional: Verzögerung je nach Reihenfolge
+  el.style.transitionDelay = `${index * 0.2}s`;
+  observer.observe(el);
+});
+});
+

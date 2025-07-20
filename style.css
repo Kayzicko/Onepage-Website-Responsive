@@ -83,16 +83,20 @@ html, body {
 
 /* ========== Hintergrundbilder ========== */
 .segment-1 {
-  background-image: url("background-home.png");
+  background-image: url("image.background-home.png");
 }
 .segment-2 {
-  background-image: url("background-about.png");
+  background-image: url("image.background-about.png");
 }
 .segment-3 {
-  background-image: url("background-skills.png");
+  background-image: url("image.background-skills.png");
 }
 .segment-4 {
-  background-image: url("background-contact.png");
+  background-image: url("image.background-contact.png");
+}
+
+.segment-5 {
+  background-image: url(Website-background1.png.png);
 }
 
 /* ========== Textboxen & Inhalte ========== */
@@ -175,14 +179,14 @@ html, body {
 .small-note {
   margin-top: 2rem;
   font-size: 0.9rem;
-  color: #ccc;
+  color:white;
 }
 
 
 .leistungs-box {
   display: flex;
   flex-wrap: wrap; /* mehrere Zeilen */
-  justify-content: center;
+  justify-content: right;
   gap: 2rem;
 }
 
@@ -202,36 +206,49 @@ html, body {
   transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   background-color: rgba(255,255,255,0.2);
-  color: #fff;
+  color: white;
 }
 
 .leistungs-karte h3 {
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
-  color: #ffffff;
+  color: white;
 }
 
 .leistungs-karte p {
   font-size: 0.95rem;
-  color: #e0e0e0;
+  color: white;
 }
 
 /* ========== Portfolio Segment ========== */
 
-.segment-2{
-    background-color: #000000;
-    align-items:center;
+.segment-2 {
+  background-color: #000000;
+  align-items: center;
 }
 
+/* Layout für die gesamte Portfolio-Sektion */
 .portfolio-box {
   display: flex;
-  flex-wrap: wrap; /* mehrere Zeilen */
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: right;
   gap: 2rem;
+
 }
 
+/* Jede Karte liegt in eigener Box für stabiles Layout */
+.portfolio-wrapper {
+  flex: 1 1 300px;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  min-height: 180px; /* Platz für aufklappende Inhalte */
+}
+
+/* Design der Portfolio-Karte */
 .portfolio-karte {
-  width: 250px; /* oder 100%, wenn responsive */
+  width: 100%;
   padding: 1rem;
   border: 1px solid white;
   border-radius: 8px;
@@ -239,13 +256,36 @@ html, body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   text-align: left;
+  position: relative;
 }
 
-.portfolio-karte:hover{
+/* Hover-Effekt für bessere Interaktivität */
+.portfolio-karte:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  background-color: rgba(255,255,255,0.2);
-  color: #fff;   
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Ausklappbare Detailbox – standardmäßig versteckt */
+.portfolio-details {
+  position: absolute;
+  right: 100%; /* erscheint unterhalb der Karte */
+  left: 0;
+  right: 100px;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  z-index: 2;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Sichtbar bei aktiver Karte */
+.portfolio-karte.active .portfolio-details {
+  max-height: 300px;
+  opacity: 1;
 }
 
 /* ========= Deatilas An / Aus =========== */
@@ -396,4 +436,118 @@ html, body {
   .overlay-text {
     padding: 1.5rem;
   }
+}
+
+/* ==== Dark-/Light-Mode Umschaltung ==== */
+body.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.light-mode .segment {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+body.light-mode .overlay-text,
+body.light-mode .skills-box,
+body.light-mode .contact-box {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+body.light-mode .main-nav a {
+  color: #0057ff;
+}
+
+body.light-mode .main-nav a:hover {
+  color: #000;
+}
+
+.mode-toggle {
+  position: fixed;
+  top: 5.5rem;      /* Statt oben → unten rechts */
+  right: 1.5rem;
+  background: #4ea0ff;
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 2000;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.mode-toggle:hover {
+  transform: scale(1.15);
+  background: #2f79d4;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background-color: #000000;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: white;
+}
+
+.filter-btn.active {
+  background-color: #878788;
+}
+
+/* ========== Scroll-Animationen (Fade-in) ========== */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Basiszustand: noch nicht sichtbar */
+.scroll-fade-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Sobald sichtbar: Fade + Bewegung */
+.scroll-fade-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-in {
+  animation: slideInLeft 0.6s ease forwards;
 }
