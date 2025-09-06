@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -9,19 +8,17 @@
     <script defer src="script.js"></script>
   </head>
   <body>
-    <!-- Header mit Navigation -->
+    <!-- Header -->
     <header class="site-header">
       <div class="nav-container">
         <div class="logo">
           <img src="Firmen Logo.jpg" alt="Logo" class="logo-icon" />
           <span>Bitvision Studios</span>
         </div>
-        <div class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav">
-          <span></span>
-          <span></span>
-          <span></span>
+        <div class="burger" id="burger">
+          <span></span><span></span><span></span>
         </div>
-        <nav class="main-nav" id="nav" aria-label="Hauptnavigation">
+        <nav class="main-nav" id="nav">
           <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
@@ -34,67 +31,84 @@
       </div>
     </header>
 
-    <!-- Segment 1: Home -->
+    <!-- Hero -->
     <section id="home" class="segment segment-1">
-      <!-- optional: Hero-Inhalt -->
-    </section>
-
-    <!-- Portfolio Segment -->
-    <section id="portfolio" class="segment segment-2">
-      <div class="overlay-text portfolio-box">
-        <h2>Portfolio</h2>
-        <div class="filter-buttons" role="tablist" aria-label="Portfolio-Filter">
-          <button data-filter="alle" class="filter-btn active" role="tab" aria-selected="true">Alle</button>
-          <button data-filter="websites" class="filter-btn" role="tab" aria-selected="false">Websites 🌐</button>
-          <button data-filter="shops" class="filter-btn" role="tab" aria-selected="false">Shops 🛒</button>
-          <button data-filter="designs" class="filter-btn" role="tab" aria-selected="false">Designs 🎨</button>
+      <div class="hero">
+        <div class="hero-content">
+          <h1>Digitale Auftritte, die performen.</h1>
+          <p>
+            Wir konzipieren und entwickeln <span
+              class="highlight">Websites</span>,
+            <span class="highlight">Shops</span> und <span
+              class="highlight">Designs</span>,
+            die zu Ergebnissen führen – vom ersten Pixel bis zum Launch.
+          </p>
+          <ul>
+            <li>✔ Individuelle Onepager & Shops – kein Baukasten</li>
+            <li>✔ Sauberes Frontend & performantes Backend</li>
+            <li>✔ Designs, die konsistent skalieren</li>
+          </ul>
+          <div class="hero-buttons">
+            <a href="#portfolio" class="btn-primary">🚀 Projekte ansehen</a>
+            <a href="#contact" class="btn-secondary">📩 Projekt anfragen</a>
+          </div>
         </div>
 
-        <!-- Ein gemeinsamer Wrapper (stabiler fürs Layout/Filter) -->
-        <div class="portfolio-wrapper scroll-fade-left">
-          <div class="portfolio-karte" data-kategorie="websites">
-            <h3>Websites</h3>
-            <div class="details portfolio-details">
-              <h2>Platzhalter</h2>
-              <p>Beispiel1</p>
-              <p>Beispiel2</p>
-              <p>Beispiel3</p>
+        <!-- Hero Slideshow -->
+        <div class="hero-slideshow">
+          <div id="hero-slides" class="slides">
+            <div class="slide is-active">
+              <img src="Journal-Bild-1.png" alt="Projekt 1" />
+              <h3>Corporate Website – Tech Startup</h3>
+            </div>
+            <div class="slide">
+              <img src="Journal-Bild-2.png" alt="Projekt 2" />
+              <h3>Designsystem – Clean UI</h3>
+            </div>
+            <div class="slide">
+              <img src="Journal-Bild-3.png" alt="Projekt 3" />
+              <h3>E-Commerce Shop</h3>
             </div>
           </div>
-
-          <div class="portfolio-karte" data-kategorie="shops">
-            <h3>Shops</h3>
-            <div class="details portfolio-details">
-              <h2>Platzhalter</h2>
-              <p>Beispiel1</p>
-              <p>Beispiel2</p>
-              <p>Beispiel3</p>
-            </div>
-          </div>
-
-          <div class="portfolio-karte" data-kategorie="designs">
-            <h3>Designs</h3>
-            <div class="details portfolio-details">
-              <h2>Platzhalter</h2>
-              <p>Beispiel1</p>
-              <p>Beispiel2</p>
-              <p>Beispiel3</p>
-            </div>
-          </div>
+          <button id="slide-prev" class="slide-control">‹</button>
+          <button id="slide-next" class="slide-control">›</button>
+          <div id="slide-dots" class="slide-dots"></div>
         </div>
       </div>
     </section>
 
-    <!-- Segment 3: Skills -->
+    <!-- Portfolio -->
+    <section id="portfolio" class="segment segment-2">
+      <div class="overlay-text portfolio-box">
+        <h2>Portfolio</h2>
+        <div class="filter-buttons">
+          <button data-filter="websites" class="filter-btn">Websites 🌐</button>
+          <button data-filter="shops" class="filter-btn">Shops 🛒</button>
+          <button data-filter="designs" class="filter-btn">Designs 🎨</button>
+        </div>
+
+        <!-- Dynamischer Bereich -->
+        <div class="portfolio-content">
+          <p>Bitte wähle eine Kategorie aus, um Projekte zu sehen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
     <section id="skills" class="segment segment-3">
       <div class="overlay-text skills-box scroll-fade">
         <h2>Unsere Kenntnisse</h2>
         <ul class="skill-list">
-          <li><strong>HTML &amp; CSS:</strong> Sauberer Aufbau von Onepagern, responsive und modern.</li>
-          <li><strong>Java:</strong> Erste Erfahrungen, aktuell Fokus auf Basics und Strukturverständnis.</li>
-          <li><strong>Python:</strong> Kleinere Projekte mit GUI (z. B. Einkaufslisten), stetige Weiterentwicklung.</li>
-          <li><strong>Design:</strong> Kreativ, strukturiert und benutzerzentriert – vom Logo bis zur Codezeile.</li>
-          <li><strong>Django:</strong> Erste Schritte in der Webentwicklung mit Python, Fokus auf Backend-Entwicklung.</li>
+          <li><strong>HTML &amp; CSS:</strong> Sauberer Aufbau von Onepagern,
+            responsive und modern.</li>
+          <li><strong>Java:</strong> Erste Erfahrungen, aktuell Fokus auf Basics
+            und Strukturverständnis.</li>
+          <li><strong>Python:</strong> Kleinere Projekte mit GUI (z. B.
+            Einkaufslisten), stetige Weiterentwicklung.</li>
+          <li><strong>Design:</strong> Kreativ, strukturiert und
+            benutzerzentriert – vom Logo bis zur Codezeile.</li>
+          <li><strong>Django:</strong> Erste Schritte in der Webentwicklung mit
+            Python, Fokus auf Backend-Entwicklung.</li>
         </ul>
       </div>
     </section>
@@ -122,14 +136,16 @@
       </div>
     </section>
 
-    <!-- Segment 2: Über uns -->
+    <!-- Über uns -->
     <section id="about" class="segment segment-2">
       <div class="overlay-text" id="about-text">
         <h2>Über uns</h2>
         <p>
-          Was als kreative Spielerei begann, wurde zu unserer Vision: Wir möchten
+          Was als kreative Spielerei begann, wurde zu unserer Vision: Wir
+          möchten
           Menschen helfen, durch ansprechende und funktionale Websites sichtbar
-          zu werden – sei es für Unternehmen, Freelancer oder persönliche Projekte.
+          zu werden – sei es für Unternehmen, Freelancer oder persönliche
+          Projekte.
         </p>
         <p>
           Unser Fokus liegt auf individuell programmierten Websites, Shops,
@@ -145,19 +161,19 @@
       </div>
     </section>
 
-    <!-- Segment 4: Kontakt -->
+    <!-- Kontakt -->
     <section id="contact" class="segment segment-4">
       <div class="overlay-text contact-box">
         <h2>Kontakt</h2>
         <p>Bereit für Ihr Projekt? Wir freuen uns auf Ihre Nachricht!</p>
         <div class="contact-actions">
-          <a href="mailto:BitvisionStudios@gmail.com" class="contact-button">
-            📧 E-Mail schreiben
-          </a>
+          <a href="mailto:BitvisionStudios@gmail.com" class="contact-button">📧
+            E-Mail schreiben</a>
         </div>
         <p class="small-note">
           Oder schreibt uns direkt auf
-          <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/" target="_blank"
+            rel="noopener">GitHub</a>
         </p>
       </div>
     </section>
@@ -167,71 +183,57 @@
       <div class="footer-content">
         <p>&copy; 2025 Bitvision Studios</p>
         <p>
-          <a href="#" onclick="event.preventDefault(); openModal('modal-impressum');">📄 Impressum</a>
-          <a href="#" onclick="event.preventDefault(); openModal('modal-datenschutz');">🔐 Datenschutz</a>
+          <a href="#"
+            onclick="event.preventDefault(); openModal('modal-impressum');">📄
+            Impressum</a>
+          <a href="#"
+            onclick="event.preventDefault(); openModal('modal-datenschutz');">🔐
+            Datenschutz</a>
         </p>
       </div>
     </footer>
 
-    <!-- === MODAL: IMPRESSUM === -->
-    <div id="modal-impressum" class="modal" role="dialog" aria-modal="true" aria-labelledby="impressum-title">
+    <!-- Modals -->
+    <div id="modal-impressum" class="modal" role="dialog" aria-modal="true"
+      aria-labelledby="impressum-title">
       <div class="modal-content">
-        <button class="close-btn" type="button" aria-label="Schließen" onclick="closeModal('modal-impressum')">&times;</button>
+        <button class="close-btn" type="button" aria-label="Schließen"
+          onclick="closeModal('modal-impressum')">&times;</button>
         <h2 id="impressum-title">Impressum</h2>
-
         <p>Angaben gemäß § 5 TMG:</p>
-
-        <p><strong>Inhaber:</strong><br>
-          Timo Kaulbars &amp; Dominik van Rijswijk
-        </p>
-
-        <p><strong>Adresse:</strong><br>
-          Alfred-Delp-Straße 20<br>
-          59590 Geseke<br>
-          Deutschland
-        </p>
-
-        <p><strong>Kontakt:</strong><br>
-          E-Mail: <a href="mailto:BitvisionStudios@gmail.com">BitvisionStudios@gmail.com</a>
-        </p>
-
-        <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong><br>
-          Timo Kaulbars &amp; Dominik van Rijswijk<br>
-          Adresse wie oben
-        </p>
+        <p><strong>Inhaber:</strong><br>Timo Kaulbars &amp; Dominik van
+          Rijswijk</p>
+        <p><strong>Adresse:</strong><br>Alfred-Delp-Straße 20<br>59590
+          Geseke<br>Deutschland</p>
+        <p><strong>Kontakt:</strong><br>E-Mail: <a
+            href="mailto:BitvisionStudios@gmail.com">BitvisionStudios@gmail.com</a></p>
+        <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2
+            RStV:</strong><br>Timo Kaulbars &amp; Dominik van
+          Rijswijk<br>Adresse wie oben</p>
       </div>
     </div>
 
-    <!-- === MODAL: DATENSCHUTZ === -->
-    <div id="modal-datenschutz" class="modal" role="dialog" aria-modal="true" aria-labelledby="datenschutz-title">
+    <div id="modal-datenschutz" class="modal" role="dialog" aria-modal="true"
+      aria-labelledby="datenschutz-title">
       <div class="modal-content">
-        <button class="close-btn" type="button" aria-label="Schließen" onclick="closeModal('modal-datenschutz')">&times;</button>
+        <button class="close-btn" type="button" aria-label="Schließen"
+          onclick="closeModal('modal-datenschutz')">&times;</button>
         <h2 id="datenschutz-title">Datenschutzerklärung</h2>
-
-        <p>
-          Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Website
+        <p>Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Website
           erhebt und speichert keine personenbezogenen Daten, es sei denn, Sie
-          nehmen freiwillig per E-Mail Kontakt auf.
-        </p>
-
-        <p>
-          Beim Besuch dieser Website werden automatisch Informationen (z. B.
+          nehmen freiwillig per E-Mail Kontakt auf.</p>
+        <p>Beim Besuch dieser Website werden automatisch Informationen (z. B.
           Browsertyp, Datum, Uhrzeit) durch den Webserver erfasst. Diese Daten
           sind nicht bestimmten Personen zuordenbar und dienen ausschließlich
-          der technischen Sicherstellung des Betriebs.
-        </p>
-
-        <p>
-          Wenn Sie uns eine E-Mail senden, wird Ihre Adresse ausschließlich zur
-          Beantwortung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben.
-        </p>
-
-        <p>
-          Sie haben jederzeit das Recht auf Auskunft, Berichtigung oder Löschung
-          Ihrer gespeicherten Daten. Bei Fragen wenden Sie sich bitte an:
-          <a href="mailto:BitvisionStudios@gmail.com">BitvisionStudios@gmail.com</a>
-        </p>
-
+          der technischen Sicherstellung des Betriebs.</p>
+        <p>Wenn Sie uns eine E-Mail senden, wird Ihre Adresse ausschließlich zur
+          Beantwortung Ihrer Anfrage verwendet und nicht an Dritte
+          weitergegeben.</p>
+        <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung oder
+          Löschung Ihrer gespeicherten Daten. Bei Fragen wenden Sie sich bitte
+          an:
+          <a
+            href="mailto:BitvisionStudios@gmail.com">BitvisionStudios@gmail.com</a></p>
         <p>Weitere Infos auf Anfrage.</p>
       </div>
     </div>
