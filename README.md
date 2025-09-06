@@ -4,6 +4,6 @@
 🔗 [Live ansehen](https://kayzicko.github.io/Onepage-Website-Responsive/)
 
 ## Inhalte
-- Segmentierter Aufbau (Home,,Porfolio, Leistung, Skills, Über Uns, Kontakt)
+- Segmentierter Aufbau (Home, Über mich, Skills, Kontakt)
 - Responsives Design mit Mobile-Navigation
 - Datenschutz & Impressum als Popup

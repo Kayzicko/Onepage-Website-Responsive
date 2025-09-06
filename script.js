@@ -1,50 +1,76 @@
-// ========== Burger-Menü Steuerung ==========
+// =========================
+// Initial-Setup (CSS-Fallback steuern)
+// =========================
+document.documentElement.classList.add("js-enabled");
+
+// =========================
+// Burger-Menü
+// =========================
 const burger = document.getElementById("burger");
 const nav = document.getElementById("nav");
 
 if (burger && nav) {
-  // Menü öffnen/schließen bei Klick auf Burger
-  burger.addEventListener("click", function () {
-    nav.classList.toggle("open");
-  });
+  const toggleNav = () => {
+    const opened = nav.classList.toggle("open");
+    burger.setAttribute("aria-expanded", opened ? "true" : "false");
+  };
 
-  // Menü schließen bei Klick auf Link (nur in mobiler Ansicht)
+  burger.addEventListener("click", toggleNav);
+
+  // Menü bei Link-Klick schließen (mobil)
   const navLinks = nav.querySelectorAll("a");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("open");
-    });
-  });
+  navLinks.forEach((link) =>
+    link.addEventListener("click", () => nav.classList.remove("open"))
+  );
 }
 
-// ========== Modalsteuerung ==========
+// =========================
+// Modals (Impressum/Datenschutz)
+// =========================
 function openModal(id) {
-  document.getElementById(id).style.display = "block";
+  const modal = document.getElementById(id);
+  if (modal) modal.style.display = "block";
 }
 
 function closeModal(id) {
-  document.getElementById(id).style.display = "none";
+  const modal = document.getElementById(id);
+  if (modal) modal.style.display = "none";
 }
 
-window.onclick = function (event) {
+// Klick außerhalb schließt Modal
+window.addEventListener("click", (event) => {
   ["modal-impressum", "modal-datenschutz"].forEach((id) => {
     const modal = document.getElementById(id);
-    if (event.target === modal) {
+    if (modal && event.target === modal) {
       modal.style.display = "none";
     }
   });
-};
+});
 
-// ========== Portfolio Detail-Steuerung ==========
+// ESC-Taste schließt offenes Modal
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    ["modal-impressum", "modal-datenschutz"].forEach((id) => {
+      const modal = document.getElementById(id);
+      if (modal && modal.style.display === "block") {
+        modal.style.display = "none";
+      }
+    });
+  }
+});
+
+// =========================
+// Portfolio: Detail-Toggle pro Karte
+// =========================
 document.addEventListener("DOMContentLoaded", () => {
   const karten = document.querySelectorAll(".portfolio-karte");
   const closeTimers = new Map();
 
   karten.forEach((karte) => {
-    // Klick öffnet oder schließt (ideal für Touch-Geräte)
     karte.addEventListener("click", (e) => {
       e.stopPropagation();
-      const istAktiv = karte.classList.contains("active");
+
+      const warAktiv = karte.classList.contains("active");
 
       // Alle schließen
       karten.forEach((andere) => {
@@ -56,13 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // Nur öffnen, wenn nicht aktiv
-      if (!istAktiv) {
+      // Diese öffnen, wenn sie vorher zu war
+      if (!warAktiv) {
         karte.classList.add("active");
       }
     });
 
-    // Desktop: Mausverlassen → schließen
     karte.addEventListener("mouseleave", () => {
       const timer = setTimeout(() => {
         karte.classList.remove("active");
@@ -71,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
       closeTimers.set(karte, timer);
     });
 
-    // Desktop: Rückkehr → Timer abbrechen
     karte.addEventListener("mouseenter", () => {
       const timer = closeTimers.get(karte);
       if (timer) {
@@ -80,92 +104,80 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  document.addEventListener("click", () => {
+    karten.forEach((k) => k.classList.remove("active"));
+  });
 });
 
-// ========== Dark-/Light-Mode Umschalten + Speichern ==========
-const toggleBtn = document.getElementById("mode-toggle");
-const body = document.body;
-
-const gespeicherterModus = localStorage.getItem("design-modus");
-if (gespeicherterModus === "light") {
-  body.classList.add("light-mode");
-  toggleBtn.textContent = "🌙";
-}
-
-toggleBtn.addEventListener("click", () => {
-  body.classList.toggle("light-mode");
-
-  const istLight = body.classList.contains("light-mode");
-  toggleBtn.textContent = istLight ? "🌙" : "☀️";
-  localStorage.setItem("design-modus", istLight ? "light" : "dark");
-});
-
+// =========================
 // Portfolio-Filter
+// =========================
 document.addEventListener("DOMContentLoaded", () => {
   const filterButtons = document.querySelectorAll(".filter-btn");
   const karten = document.querySelectorAll(".portfolio-karte");
+
+  if (!filterButtons.length || !karten.length) return;
 
   filterButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const filter = btn.getAttribute("data-filter");
 
-      // Aktiven Button visuell markieren
+      // Aktiven Button markieren
       filterButtons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
 
-      karten.forEach((karte) => {
+      karten.forEach((karte, idx) => {
         const kategorie = karte.getAttribute("data-kategorie");
-
         const sichtbar = filter === "alle" || filter === kategorie;
 
-        // Sichtbarkeit steuern
-        karte.style.display = sichtbar ? "block" : "none";
+        karte.style.display = sichtbar ? "" : "none";
 
-        // Animation resetten
         if (sichtbar) {
           karte.classList.remove("animate-in");
-          void karte.offsetWidth; // ← Browser zwingt Repaint
+          void karte.offsetWidth; // Reflow erzwingen
+          karte.style.animationDelay = `${idx * 0.03}s`;
           karte.classList.add("animate-in");
-        }
-
-        // Bei Wechsel: Details sicher schließen
-        if (!sichtbar) {
+        } else {
           karte.classList.remove("active");
-          karten.forEach((karte) => karte.classList.add("animate-in"));
         }
       });
     });
   });
 });
 
-      
-// ========== Sichtbarkeits-Animation: Jedes Mal beim Reinscrollen ==========
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      // Wenn sichtbar → "visible" hinzufügen
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      } else {
-        // Wenn NICHT sichtbar → "visible" entfernen
-        entry.target.classList.remove("visible");
+// =========================
+// Scroll-Animationen
+// =========================
+(function initScrollAnimations() {
+  const fadeEls = document.querySelectorAll(".scroll-fade, .scroll-fade-left");
+
+  if (!fadeEls.length) return;
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          } else {
+            entry.target.classList.remove("is-visible");
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -10% 0px",
       }
+    );
+
+    const leftEls = document.querySelectorAll(".scroll-fade-left");
+    leftEls.forEach((el, index) => {
+      el.style.transitionDelay = `${index * 0.1}s`;
     });
-  },
-  {
-    threshold: 0.1,
+
+    fadeEls.forEach((el) => observer.observe(el));
+  } else {
+    fadeEls.forEach((el) => el.classList.add("is-visible"));
   }
-);
-
-// Alle Elemente mit scroll-fade animieren
-document.querySelectorAll(".scroll-fade").forEach((el) => {
-  observer.observe(el);
-
-  // Alle .scroll-fade-left-Elemente beobachten
-document.querySelectorAll(".scroll-fade-left").forEach((el, index) => {
-  // Optional: Verzögerung je nach Reihenfolge
-  el.style.transitionDelay = `${index * 0.2}s`;
-  observer.observe(el);
-});
-});
-
+})();

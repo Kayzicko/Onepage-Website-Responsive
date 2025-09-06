@@ -5,7 +5,9 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
+  background-color: #cbcbd3;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -65,7 +67,8 @@ html, body {
 /* ========== Segmente Allgemein ========== */
 .segment {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;      /* <-- statt fix height */
+  height: auto;           /* wächst mit Inhalt */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -75,29 +78,14 @@ html, body {
   color: white;
   text-align: center;
   scroll-margin-top: 80px;
+  overflow: visible;       /* nichts abschneiden */
 }
 
 .segment + .segment {
   box-shadow: inset 0 6px 6px -6px rgba(0, 0, 0, 0.4);
 }
 
-/* ========== Hintergrundbilder ========== */
-.segment-1 {
-  background-image: url("image.background-home.png");
-}
-.segment-2 {
-  background-image: url("image.background-about.png");
-}
-.segment-3 {
-  background-image: url("image.background-skills.png");
-}
-.segment-4 {
-  background-image: url("image.background-contact.png");
-}
-
-.segment-5 {
-  background-image: url(Website-background1.png.png);
-}
+.segment-1 {}
 
 /* ========== Textboxen & Inhalte ========== */
 .overlay-text,
@@ -107,8 +95,8 @@ html, body {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2.5rem;
   border-radius: 12px;
-  max-width: 900px;
-  margin: auto;
+  max-width: 1100px;
+  margin: 3rem auto;       /* etwas Luft */
 }
 
 .overlay-text h1,
@@ -127,6 +115,20 @@ html, body {
 
 .highlight {
   color: #4ea0ff;
+}
+
+#about-text {
+  font-size: 1.4rem;
+  color: #e0f0ff;
+  background: rgba(30, 40, 70, 0.7);
+  padding: 24px 32px;
+  border-radius: 18px;
+  margin: 32px auto;
+  max-width: 800px;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 32px 0 rgba(0, 40, 150, 0.12);
+  text-align: center;
 }
 
 /* ========== Skills Liste ========== */
@@ -179,33 +181,33 @@ html, body {
 .small-note {
   margin-top: 2rem;
   font-size: 0.9rem;
-  color:white;
+  color: white;
 }
 
-
+/* ========== Leistungs-Segment ========== */
 .leistungs-box {
-  display: flex;
-  flex-wrap: wrap; /* mehrere Zeilen */
-  justify-content: right;
+  display: grid;                          /* stabiler als flex-wrap */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 2rem;
+  align-items: stretch;
+  justify-items: center;
 }
-
 
 .leistungs-karte {
-  width: 250px; /* oder 100%, wenn responsive */
+  width: 100%;
   padding: 1rem;
   border: 1px solid white;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   text-align: left;
 }
 
 .leistungs-karte:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  background-color: rgba(255,255,255,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
   color: white;
 }
 
@@ -221,29 +223,45 @@ html, body {
 }
 
 /* ========== Portfolio Segment ========== */
-
 .segment-2 {
-  background-color: #000000;
   align-items: center;
 }
 
-/* Layout für die gesamte Portfolio-Sektion */
+/* Überschrift + Filter nebeneinander/untereinander */
 .portfolio-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: right;
-  gap: 2rem;
-
+  display: block;
 }
 
-/* Jede Karte liegt in eigener Box für stabiles Layout */
-.portfolio-wrapper {
-  flex: 1 1 300px;
-  max-width: 300px;
+.filter-buttons {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
   justify-content: center;
-  position: relative;
-  min-height: 180px; /* Platz für aufklappende Inhalte */
+  margin: 1rem 0 2rem;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid #78baff;
+  color: #78baff;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #78baff;
+  color: #000a2f;
+}
+
+/* Ein gemeinsamer Grid-Wrapper für alle Karten */
+.portfolio-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
 }
 
 /* Design der Portfolio-Karte */
@@ -254,12 +272,11 @@ html, body {
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   text-align: left;
   position: relative;
 }
 
-/* Hover-Effekt für bessere Interaktivität */
 .portfolio-karte:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -267,51 +284,39 @@ html, body {
   color: #fff;
 }
 
-/* Ausklappbare Detailbox – standardmäßig versteckt */
+/* Detailbereich – standardmäßig zu, innerhalb der Karte */
 .portfolio-details {
-  position: absolute;
-  right: 100%; /* erscheint unterhalb der Karte */
-  left: 0;
-  right: 100px;
-  background-color: rgba(255, 255, 255, 0.08);
-  padding: 1rem;
-  z-index: 2;
+  position: relative;    /* <-- nicht absolut, klappt im Flow auf */
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  padding: 0 1rem;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease, margin-top 0.3s ease;
 }
 
 /* Sichtbar bei aktiver Karte */
 .portfolio-karte.active .portfolio-details {
-  max-height: 300px;
+  max-height: 320px;
   opacity: 1;
+  padding: 1rem;
+  margin-top: 0.75rem;
 }
 
-/* ========= Deatilas An / Aus =========== */
-
-.details{
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    opacity: 0
-}
-
-.portfolio-karte .portfolio-details {
+/* (Optionale) generische .details Toggle-Regel */
+.details {
   max-height: 0;
-  opacity: 0;
   overflow: hidden;
   transition: max-height 0.3s ease, opacity 0.3s ease;
-}
-
-.portfolio-karte.active .portfolio-details {
-  max-height: 300px;
-  opacity: 1;
+  opacity: 0;
 }
 
 /* ========== Footer ========== */
 .site-footer {
-  background-color: #0a0a23;
+  background: #000a2f;
   color: #ccc;
   text-align: center;
   padding: 2rem 1rem;
@@ -373,6 +378,8 @@ html, body {
   font-size: 1.5rem;
   color: #4ea0ff;
   cursor: pointer;
+  background: transparent;
+  border: none;
 }
 
 .close-btn:hover {
@@ -438,114 +445,38 @@ html, body {
   }
 }
 
-/* ==== Dark-/Light-Mode Umschaltung ==== */
-body.light-mode {
-  background-color: #ffffff;
-  color: #000000;
+/* ========== Scroll-Animationen ========== */
+/* Einheitliches System: Standard sichtbar, aber erst mit JS initial hide */
+.scroll-fade,
+.scroll-fade-left {
+  /* Basis: ohne JS sichtbar */
+  opacity: 1;
+  transform: none;
 }
 
-body.light-mode .segment {
-  background-color: #f0f0f0;
-  color: #000;
-}
-
-body.light-mode .overlay-text,
-body.light-mode .skills-box,
-body.light-mode .contact-box {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-body.light-mode .main-nav a {
-  color: #0057ff;
-}
-
-body.light-mode .main-nav a:hover {
-  color: #000;
-}
-
-.mode-toggle {
-  position: fixed;
-  top: 5.5rem;      /* Statt oben → unten rechts */
-  right: 1.5rem;
-  background: #4ea0ff;
-  color: white;
-  font-size: 1.4rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  z-index: 2000;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.mode-toggle:hover {
-  transform: scale(1.15);
-  background: #2f79d4;
-}
-
-.filter-buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.filter-btn {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  background-color: #000000;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.filter-btn:hover {
-  background-color: white;
-}
-
-.filter-btn.active {
-  background-color: #878788;
-}
-
-/* ========== Scroll-Animationen (Fade-in) ========== */
-.scroll-fade {
+/* Wenn JS aktiv ist, werden sie beim Laden ausgeblendet
+   und per IntersectionObserver mit .is-visible eingeblendet */
+html.js-enabled .scroll-fade {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.scroll-fade.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Basiszustand: noch nicht sichtbar */
-.scroll-fade-left {
+html.js-enabled .scroll-fade-left {
   opacity: 0;
   transform: translateX(-50px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* Sobald sichtbar: Fade + Bewegung */
-.scroll-fade-left.visible {
-  opacity: 1;
-  transform: translateX(0);
+.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
+/* Optional: Keyframes für alternative Nutzung */
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .animate-in {
