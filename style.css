@@ -453,7 +453,7 @@ body {
   position: fixed;
   z-index: 2000;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #cbcbd3;
 }
 .modal-content {
   background-color: #0d1b2a;
