@@ -453,10 +453,10 @@ body {
   position: fixed;
   z-index: 2000;
   inset: 0;
-  background-color: #cbcbd3;
+  background-color: #0d1b2a;
 }
 .modal-content {
-  background-color: #0d1b2a;
+  background-color: #cbcbd3;
   margin: 10% auto;
   padding: 2rem;
   border: 2px solid #4ea0ff;
