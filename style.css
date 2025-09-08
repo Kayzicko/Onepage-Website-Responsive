@@ -1,26 +1,47 @@
-/* ========== Basis Reset ========== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* =========================================================
+   0) RESET & BASIS
+   ========================================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-html,
-body {
-  background-color: #cbcbd3;
-  width: 100%;
-  height: 100%;
+html, body {
+  width: 100%; height: 100%;
   overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #0a0f2d 0%, #1e2235 100%);
+  color: #fff;
 }
 
-/* ========== Header & Navigation ========== */
+/* =========================================================
+   1) DESIGN-TOKENS (HEX)
+   ========================================================= */
+:root {
+  /* Akzente */
+  --accent:           #4EA0FF;
+  --accent-2:         #78BAFF;
+
+  /* Text */
+  --text-dark:        #000A2F;  /* für helle Flächen */
+  --text-light:       #E9F2FF;  /* für dunkle Flächen */
+
+  /* Paneele/Karten */
+  --panel-dark:       #0F1733;  /* Standard dunkle Box */
+  --panel-dark-2:     #162048;  /* Variation */
+  --panel-hover:      #1B274A;  /* Hover auf Karten */
+  --panel-border:     #2A3B6B;  /* Rahmen auf dunklen Boxen */
+
+  /* Helle Flächen */
+  --panel-light:      #CBCBD3;
+  --panel-light-text: #000A2F;
+}
+
+/* =========================================================
+   2) HEADER & NAVIGATION
+   ========================================================= */
 .site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: fixed; inset: 0 0 auto 0;
+  height: auto;
   width: 100%;
   background: #000a2f;
   padding: 1rem 2rem;
@@ -28,479 +49,267 @@ body {
 }
 
 .nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
 }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 1.8rem; color: #fff; }
+.logo-icon { width: 40px; height: 40px; }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.8rem;
-  color: white;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-}
-
-.main-nav ul {
-  display: flex;
-  gap: 1.5rem;
-  list-style: none;
-}
-
+.main-nav ul { display: flex; gap: 1.5rem; list-style: none; }
 .main-nav a {
-  color: #78baff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  color: #78baff; text-decoration: none; font-weight: 500; transition: color .3s ease;
 }
+.main-nav a:hover { color: #fff; }
 
-.main-nav a:hover {
-  color: white;
-}
+/* Burger */
+.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.burger span { height: 3px; width: 25px; background: #78baff; border-radius: 2px; }
 
-/* ========== Segmente Allgemein ========== */
+/* =========================================================
+   3) SEGMENTE (ALLGEMEIN)
+   ========================================================= */
 .segment {
   width: 100%;
   min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  color: white;
-  text-align: center;
+  background-size: cover; background-position: center;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; position: relative;
   scroll-margin-top: 80px;
 }
-
 .segment + .segment {
-  box-shadow: inset 0 6px 6px -6px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 6px 6px -6px rgba(0,0,0,.4);
 }
 
-/* ========== Hero (Home) ========== */
-/* Hero-Bereich soll volle Höhe bis zum Portfolio einnehmen */
+/* =========================================================
+   4) HERO (HOME)
+   ========================================================= */
 .segment-1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 80px); /* volle Höhe abzüglich Header */
+  display: flex; align-items: center; justify-content: center;
+  min-height: calc(100vh - 80px); /* abzüglich fixed Header */
   padding: 2rem 0;
-  background: #cbcbd3;
+  background: linear-gradient(135deg, #0a0f2d 0%, #1e2235 100%);
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 2rem;
-  width: min(1200px, 92vw);
-  margin: 0 auto;
-  align-items: center;
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem;
+  width: min(1200px, 92vw); margin: 0 auto; align-items: center;
 }
 
+/* Hero Text */
 .hero-content {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 2.25rem;
-  border-radius: 12px;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+  background: var(--panel-light);
+  color: var(--panel-light-text);
+  padding: 2.25rem; border-radius: 12px;
+  box-shadow: 0 0 24px rgba(0,0,0,.7);
   text-align: left;
 }
-
 .hero-content h1 {
   font-size: clamp(2rem, 3.5vw, 3rem);
-  line-height: 1.15;
-  margin-bottom: 0.75rem;
-  color: #4ea0ff;
+  line-height: 1.15; margin-bottom: .75rem; color: #000a2f;
 }
+.hero-sub { font-size: 1.1rem; color: #000a2f; margin-bottom: 1rem; }
+.hero-bullets { list-style: none; margin: 1rem 0 1.5rem; padding: 0; }
+.hero-bullets li { margin: .4rem 0; padding-left: 1.4rem; position: relative; }
+.hero-bullets li::before { content: "✔"; position: absolute; left: 0; color: #000a2f; }
 
-.hero-sub {
-  font-size: 1.1rem;
-  color: #e6f0ff;
-  margin-bottom: 1rem;
+.hero-cta { display: flex; flex-wrap: wrap; gap: .75rem; }
+.contact-button {
+  background: #1e90ff; color: #fff; padding: .8rem 1.6rem; border-radius: 8px;
+  text-decoration: none; font-weight: 700; transition: background .25s ease;
 }
+.contact-button:hover { background: #0f5bb5; }
+.contact-button--ghost { background: transparent; border: 1px solid #78baff; color: #000a2f; }
+.contact-button--ghost:hover { background: #78baff; color: #000a2f; }
 
-.hero-bullets {
-  list-style: none;
-  margin: 1rem 0 1.5rem;
-  padding: 0;
-}
-.hero-bullets li {
-  margin: 0.4rem 0;
-  padding-left: 1.4rem;
-  position: relative;
-}
-.hero-bullets li::before {
-  content: "✔";
-  position: absolute;
-  left: 0;
-  color: #78baff;
-}
-
-.hero-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-.contact-button--ghost {
-  background: transparent;
-  border: 1px solid #78baff;
-  color: #78baff;
-}
-.contact-button--ghost:hover {
-  background: #78baff;
-  color: #000a2f;
-}
-
-/* Slideshow */
-.hero-slideshow {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.35);
-  box-shadow: 0 10px 32px rgba(0,0,0,0.35);
-  background: rgba(255,255,255,0.05);
-}
+/* Hero Slideshow */
+.hero-slideshow { position: relative; }
 .slides {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  position: relative; width: 100%; aspect-ratio: 16/9;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 10px 32px rgba(0,0,0,.35);
+  background: #0B1430;
 }
-.slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity .6s ease;
-  display: grid;
-  place-items: stretch;
-  background: #0b1430;
-}
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; }
 .slide.is-active { opacity: 1; }
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.slide img { width: 100%; height: 100%; object-fit: cover; }
+
 .slide-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: absolute; left: 0; right: 0; bottom: 0;
   padding: 1rem 1.25rem;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,10,47,0.8) 45%, rgba(0,10,47,0.95) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,10,47,.8) 45%, rgba(0,10,47,.95) 100%);
   color: #fff;
 }
-.slide-project {
-  font-size: .85rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: #78baff;
-}
-.slide-title {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  margin: 0;
-}
+.slide-project { font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-2); }
+.slide-title { font-size: clamp(1.1rem, 2vw, 1.4rem); margin: 0; }
+
+/* Hero Slideshow Controls */
 .slide-btn {
-  position: absolute;
-  top: 50%;
-  translate: 0 -50%;
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(0,0,0,.35);
-  color: #fff;
-  cursor: pointer;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 56px; height: 56px; display: grid; place-items: center;
+  border-radius: 50%; border: 2px solid rgba(255,255,255,.6);
+  background: rgba(0,0,0,.45); color: #fff; font-size: 1.6rem; cursor: pointer;
+  z-index: 5; transition: transform .15s ease, background .2s ease, border-color .2s ease;
 }
-.slide-btn.prev { left: .6rem; }
-.slide-btn.next { right: .6rem; }
+.slide-btn:hover, .slide-btn:focus-visible {
+  background: rgba(0,0,0,.7); border-color: var(--accent); outline: none;
+  transform: translateY(-50%) scale(1.08);
+}
+.slide-btn.prev { left: 10px; }
+.slide-btn.next { right: 10px; }
+
+/* Dots unter dem Bild */
 .slide-dots {
-  position: absolute;
-  left: 0; right: 0; bottom: .4rem;
-  display: flex;
-  gap: .4rem;
-  justify-content: center;
+  position: static; display: flex; justify-content: center; align-items: center;
+  gap: 8px; margin-top: .75rem;
 }
 .slide-dots button {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.6);
-  background: rgba(255,255,255,0.2);
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.6); background: rgba(255,255,255,.2);
 }
-.slide-dots button[aria-selected="true"] {
-  background: #78baff;
-  border-color: #78baff;
+.slide-dots button[aria-selected="true"] { background: var(--accent-2); border-color: var(--accent-2); }
+
+/* =========================================================
+   5) TEXT- & INFO-BOXEN (global)
+   ========================================================= */
+.overlay-text, .about-container, .skills-box, .contact-box, .portfolio-content {
+  background: var(--panel-dark);
+  color: var(--text-light);
+  border: 1px solid var(--panel-border);
+  padding: 2.5rem; border-radius: 12px; max-width: 900px; margin: auto;
 }
-
-/* ========== Textboxen & Inhalte ========== */
-.overlay-text,
-.about-container,
-.skills-box,
-.contact-box {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 2.5rem;
-  border-radius: 12px;
-  max-width: 900px;
-  margin: auto;
+.overlay-text h1, .about-container h2, .skills-box h2, .contact-box h2, .portfolio-content h2 {
+  font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent);
 }
+.overlay-text p, .contact-box p { font-size: 1.2rem; }
+.highlight { color: var(--accent); }
 
-.overlay-text h1,
-.about-container h2,
-.skills-box h2,
-.contact-box h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #4ea0ff;
-}
-
-.overlay-text p,
-.contact-box p {
-  font-size: 1.2rem;
-}
-
-.highlight { color: #4ea0ff; }
-
+/* Über uns – Variante */
 #about-text {
-  font-size: 1.4rem;
-  color: #e0f0ff;
-  background: rgba(30, 40, 70, 0.7);
-  padding: 24px 32px;
-  border-radius: 18px;
-  margin: 32px auto;
-  max-width: 600px;
-  line-height: 1.7;
-  text-align: center;
+  font-size: 1.4rem; color: var(--text-light);
+  background: var(--panel-dark-2);
+  padding: 24px 32px; border-radius: 18px; margin: 32px auto;
+  max-width: 600px; line-height: 1.7; text-align: center;
+  border: 1px solid var(--panel-border);
 }
 
-/* ========== Skills Liste ========== */
-.skill-list {
-  list-style: none;
-  padding-left: 0;
-  text-align: left;
-  margin: 2rem auto 0;
-  max-width: 800px;
+/* Links in dunklen Boxen */
+.overlay-text a, .skills-box a, .contact-box a, .portfolio-content a {
+  color: var(--accent-2); text-decoration: none;
 }
+.overlay-text a:hover, .skills-box a:hover, .contact-box a:hover, .portfolio-content a:hover {
+  color: #fff; text-decoration: underline;
+}
+
+/* =========================================================
+   6) SKILLS
+   ========================================================= */
+.skill-list { list-style: none; padding-left: 0; text-align: left; margin: 2rem auto 0; max-width: 800px; }
 .skill-list li {
-  position: relative;
-  padding-left: 2rem;
-  margin-bottom: 1.2rem;
-  line-height: 1.6;
+  display: flex; align-items: flex-start; gap: .75rem;
+  margin-bottom: 1.2rem; line-height: 1.6; font-size: 1.05rem; color: #fff;
 }
-.skill-list li::before {
-  content: "💻";
-  position: absolute;
-  left: 0;
+.skill-list li i {
+  font-size: 1.3rem; color: var(--accent); flex-shrink: 0; margin-top: .2rem;
 }
 
-/* ========== Kontakt-Bereich ========== */
-.contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 1.5rem;
-}
-.contact-button {
-  background-color: #1e90ff;
-  color: white;
-  padding: 0.8rem 1.6rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-.contact-button:hover {
-  background-color: #0f5bb5;
-}
-.small-note {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: white;
-}
+/* =========================================================
+   7) KONTAKT
+   ========================================================= */
+.contact-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+.small-note { margin-top: 2rem; font-size: .9rem; color: #fff; }
 
-/* ========== Leistungs-Segment ========== */
+/* =========================================================
+   8) LEISTUNGEN
+   ========================================================= */
 .leistungs-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
 }
 .leistungs-karte {
-  width: 250px;
-  padding: 1rem;
-  border: 1px solid white;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  text-align: left;
-  transition: all 0.3s ease;
+  width: 250px; padding: 1rem; border-radius: 8px; text-align: left;
+  background: var(--panel-dark); color: var(--text-light);
+  border: 1px solid var(--panel-border);
+  transition: background-color .25s ease, transform .25s ease;
+  box-shadow: none;
 }
-.leistungs-karte:hover {
-  transform: translateY(-5px);
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.leistungs-karte h3 { color: white; }
+.leistungs-karte:hover { transform: translateY(-5px); background: var(--panel-hover); }
+.leistungs-karte h3, .leistungs-karte p { color: var(--text-light); }
 
-/* ========== Portfolio Segment ========== */
-/* Portfolio */
-.portfolio-box {
-  text-align: center;
-}
+/* =========================================================
+   9) PORTFOLIO
+   ========================================================= */
+.portfolio-box { text-align: center; }
 
 .filter-buttons {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
 }
-
 .filter-btn {
-  background: #1e90ff;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  background: #1E90FF; color: #fff; border: none;
+  padding: .6rem 1.2rem; border-radius: 6px; cursor: pointer; transition: background .3s ease;
 }
-.filter-btn.active,
-.filter-btn:hover {
-  background: #0f5bb5;
-}
+.filter-btn:hover, .filter-btn.active { background: #0F5BB5; }
 
 /* Content-Bereich */
 .portfolio-content {
-  margin-top: 2rem;
-  background: rgba(0,0,0,0.6);
-  padding: 2rem;
-  border-radius: 12px;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  margin-top: 2rem; min-height: 400px;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
 }
 
-/* Slideshow */
+/* Slideshow (Portfolio) */
 .portfolio-slideshow {
-  position: relative;
-  max-width: 700px;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 10px;
+  position: relative; max-width: 700px; width: 100%;
+  overflow: hidden; border-radius: 10px;
+  background: var(--panel-dark-2); border: 1px solid var(--panel-border);
 }
+.portfolio-slide { display: none; text-align: center; }
+.portfolio-slide img { width: 100%; border-radius: 10px; }
+.portfolio-slide h3 { margin: 1rem 0 .5rem; color: var(--accent); }
+.portfolio-slide p { color: var(--text-light); font-size: 1rem; }
 
-.portfolio-slide {
-  display: none;
-  text-align: center;
-}
-
-.portfolio-slide img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.portfolio-slide h3 {
-  margin: 1rem 0 0.5rem;
-  color: #4ea0ff;
-}
-
-.portfolio-slide p {
-  color: #fff;
-  font-size: 1rem;
-}
-
-.portfolio-prev,
-.portfolio-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
+.portfolio-prev, .portfolio-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-size: 2rem; background: rgba(0,0,0,.5); color: #fff; border: none;
+  cursor: pointer; padding: .5rem 1rem;
 }
 .portfolio-prev { left: 10px; }
 .portfolio-next { right: 10px; }
 
-
-/* ========== Footer ========== */
-.site-footer {
-  background: #000a2f;
-  color: #ccc;
-  text-align: center;
-  padding: 2rem 1rem;
-  font-size: 0.9rem;
-}
-.site-footer a {
-  color: #78baff;
-  margin: 0 0.5rem;
-}
-.site-footer a:hover { color: #fff; }
-
-/* ========== Modal-Popups ========== */
+/* =========================================================
+   10) MODAL
+   ========================================================= */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  inset: 0;
-  background-color: #0d1b2a;
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: linear-gradient(135deg, #0a0f2d 0%, #1e2235 100%);
 }
 .modal-content {
-  background-color: #cbcbd3;
-  margin: 10% auto;
-  padding: 2rem;
-  border: 2px solid #4ea0ff;
-  width: 80%;
-  max-width: 600px;
-  color: #fff;
-  border-radius: 10px;
+  background: var(--panel-light); color: var(--panel-light-text);
+  margin: 10% auto; padding: 2rem; width: 80%; max-width: 600px;
+  border: 2px solid var(--accent); border-radius: 10px;
 }
-.close-btn {
-  float: right;
-  font-size: 1.5rem;
-  color: #4ea0ff;
-  cursor: pointer;
-}
-.close-btn:hover { color: white; }
+.close-btn { float: right; font-size: 1.5rem; color: var(--accent); cursor: pointer; }
+.close-btn:hover { color: #fff; }
 
-/* ========== Burger Menü ========== */
-.burger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
+/* =========================================================
+   11) FOOTER
+   ========================================================= */
+.site-footer {
+  background: #000a2f; color: #ccc; text-align: center;
+  padding: 2rem 1rem; font-size: .9rem;
 }
-.burger span {
-  height: 3px;
-  width: 25px;
-  background: #78baff;
-  border-radius: 2px;
-}
+.site-footer a { color: #78baff; margin: 0 .5rem; text-decoration: none; }
+.site-footer a:hover { color: #fff; }
 
-/* ========== Responsive ========== */
+/* =========================================================
+   12) RESPONSIVE
+   ========================================================= */
 @media (max-width: 980px) {
   .hero { grid-template-columns: 1fr; }
+  .slide-btn { width: 48px; height: 48px; }
 }
 @media (max-width: 768px) {
   .main-nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: #000a2f;
-    width: 100%;
-    display: none;
-    flex-direction: column;
-    align-items: center;
+    position: absolute; top: 100%; right: 0; width: 100%;
+    display: none; flex-direction: column; align-items: center;
+    background: #000a2f;
   }
   .main-nav.open { display: flex; }
   .burger { display: flex; }
@@ -508,17 +317,20 @@ body {
   .main-nav a { font-size: 1.2rem; }
   .overlay-text { padding: 1.5rem; }
 }
-
-/* ========== Scroll-Animationen ========== */
-.scroll-fade, .scroll-fade-left {
-  opacity: 1; transform: none;
+@media (max-width: 560px) {
+  .slide-btn { width: 42px; height: 42px; font-size: 1.3rem; }
 }
+
+/* =========================================================
+   13) SCROLL-ANIMATIONEN
+   ========================================================= */
+.scroll-fade, .scroll-fade-left { opacity: 1; transform: none; }
 html.js-enabled .scroll-fade {
   opacity: 0; transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity .6s ease, transform .6s ease;
 }
 html.js-enabled .scroll-fade-left {
   opacity: 0; transform: translateX(-50px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity .8s ease, transform .8s ease;
 }
 .is-visible { opacity: 1 !important; transform: none !important; }

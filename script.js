@@ -225,8 +225,12 @@ document.addEventListener("DOMContentLoaded", () => {
     restartAutoplay();
   }
 
-  function next() { goTo(index + 1); }
-  function prev() { goTo(index - 1); }
+  function next() {
+    goTo(index + 1);
+  }
+  function prev() {
+    goTo(index - 1);
+  }
 
   // Controls
   if (nextBtn) nextBtn.addEventListener("click", next);
@@ -278,18 +282,46 @@ document.addEventListener("DOMContentLoaded", () => {
   // Daten für jede Kategorie
   const data = {
     designs: [
-      { img: "Journal-Bild-1.png", title: "Dankbarkeits-Journal", desc: "Ein täglicher Begleiter für Achtsamkeit & Fokus" },
-      { img: "Journal-Bild-2.png", title: "Index", desc: "Übersicht aller Inhalte" },
-      { img: "Journal-Bild-3.png", title: "Anleitung", desc: "So nutzt du das Journal" },
-      { img: "Journal-Bild-4.png", title: "Woche 1", desc: "Deine tägliche Dankbarkeitsroutine" },
-      { img: "Journal-Bild-5.png", title: "Monat 1 Übersicht", desc: "Fokus & Habit-Tracker" }
+      {
+        img: "Journal-Bild-1.png",
+        title: "Dankbarkeits-Journal",
+        desc: "Ein täglicher Begleiter für Achtsamkeit & Fokus",
+      },
+      {
+        img: "Journal-Bild-2.png",
+        title: "Index",
+        desc: "Übersicht aller Inhalte",
+      },
+      {
+        img: "Journal-Bild-3.png",
+        title: "Anleitung",
+        desc: "So nutzt du das Journal",
+      },
+      {
+        img: "Journal-Bild-4.png",
+        title: "Woche 1",
+        desc: "Deine tägliche Dankbarkeitsroutine",
+      },
+      {
+        img: "Journal-Bild-5.png",
+        title: "Monat 1 Übersicht",
+        desc: "Fokus & Habit-Tracker",
+      },
     ],
     shops: [
-      { img: "Journal-Bild-1.png", title: "E-Book Beispiel", desc: "Ein tolles Shop-Produkt" }
+      {
+        img: "Journal-Bild-1.png",
+        title: "E-Book Beispiel",
+        desc: "Ein tolles Shop-Produkt",
+      },
     ],
     websites: [
-      { img: "https://via.placeholder.com/600x400", title: "Website Projekt", desc: "Ein modernes Webdesign" }
-    ]
+      {
+        img: "https://via.placeholder.com/600x400",
+        title: "Website Projekt",
+        desc: "Ein modernes Webdesign",
+      },
+    ],
   };
 
   filterButtons.forEach((btn) => {
@@ -309,13 +341,19 @@ document.addEventListener("DOMContentLoaded", () => {
       // Slideshow-HTML generieren
       portfolioContent.innerHTML = `
         <div class="portfolio-slideshow">
-          ${slides.map((s, i) => `
-            <div class="portfolio-slide" style="display:${i===0?'block':'none'}">
+          ${slides
+            .map(
+              (s, i) => `
+            <div class="portfolio-slide" style="display:${
+              i === 0 ? "block" : "none"
+            }">
               <img src="${s.img}" alt="${s.title}">
               <h3>${s.title}</h3>
               <p>${s.desc}</p>
             </div>
-          `).join("")}
+          `
+            )
+            .join("")}
           <button class="portfolio-prev">‹</button>
           <button class="portfolio-next">›</button>
         </div>
@@ -332,7 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let idx = 0;
 
     function showSlide(i) {
-      slides.forEach((s, j) => s.style.display = j === i ? "block" : "none");
+      slides.forEach((s, j) => (s.style.display = j === i ? "block" : "none"));
     }
     showSlide(idx);
 
